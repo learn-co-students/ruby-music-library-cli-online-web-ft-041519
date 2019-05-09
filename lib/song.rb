@@ -1,3 +1,4 @@
+require 'pry'
 class Song 
    attr_accessor :name, :artist, :genre  
   @@all = [] 
@@ -33,9 +34,7 @@ class Song
     @artist = artist
     artist.add_song(self)
     #assigning the passed in artist to the artist attr 
-    #calling on the add song method, setting the arg(song) to self. 
-    
-    #Why does the artist not need to be capitalized when calling on the add_song method?
+    #calling on the add song method on passed in artist, setting the arg for add_song(song) to self. 
   end 
   
   def genre=(genre)
@@ -43,26 +42,48 @@ class Song
     if !(genre.songs.include?(self))
       genre.songs << self
     # if genre doesnt include self in songs var then add self
+    end 
   end 
   
-  def find_by_name 
+  def self.find_by_name(name) 
     self.all.detect {|song| song.name == name}   
   end 
   
-  def find_or_create_by_name 
-    self.all.find {|song| song.name == name} || self.new(name).save  
+  def self.find_or_create_by_name(name) 
+      song = self.find_by_name(name)
+        if song == nil 
+          self.create(name)
+        else
+          song 
+        end 
   end 
+      # self.find_by_name(name) || self.create(name)
+      # self.all.find {|song| song.name == name} || self.new(name).save  
   
+  def self.new_from_filename(filename)
+    song_name = filename.split(" - ")[1]
+    artistname = filename.split(" - ")[0]
+    genrename = filename.split(" - ")[2].gsub(".mp3", "")
+    artist = Artist.find_or_create_by_name(artistname)
+    genre = Genre.find_or_create_by_name(genrename)
+    new(song_name, artist, genre) 
+    #splitting the passed in filename by index, assigning to new var's. using the new var's to invoke find_or_create_by_name
+    #on Artist and Genre classes. Creating a new song instance based on the new var song names.
   end 
+
+  def self.create_from_filename(filename)
+     new_from_filename(filename).tap {|s| s.save}
+  end 
+
+end  
   
-  
-  
+  #   new_from_filename, which instantiates a new Song object based on a provided filename.
+  # .create_from_filename, which does the same thing as .new_from_filename but also saves the newly-created song
+  # to the @@all class variable.
   # Song
   #artist=
-  #     assigns an artist to the song (song belongs to artist)
-  #artist=
-    #   invokes Artist#add_song to add itself to the artist's collection of songs(artist has many songs) 
-    # #initialize
-    #   invokes #artist= instead of simply assigning to an @artist instance variable to ensure that associations are created upon initialization 
+  #assigns an artist to the song (song belongs to artist) artist=
+  #invokes Artist#add_song to add itself to the artist's collection of songs(artist has many songs) 
+  # #initialize
+  #invokes #artist= instead of simply assigning to an @artist instance variable to ensure that associations are created upon initialization 
       
-end 
