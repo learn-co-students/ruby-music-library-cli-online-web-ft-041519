@@ -1,3 +1,5 @@
+# require_relative './concerns.rb'
+
 class Artist 
   extend Findable
   attr_accessor :name 

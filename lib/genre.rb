@@ -1,3 +1,5 @@
+# require_relative './concerns.rb'
+
 class Genre 
   extend Findable
    attr_accessor :name 
