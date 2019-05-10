@@ -8,13 +8,10 @@ class Song
 
   def initialize(name, *artist)
     @name = name
-    self.artist=(artist)
+    @artist = artist[0]
+    #self.artist=(artist[0])
     @@all << self
   end
-
-  # def artist=(artist)
-  #   artist.add_song(self)
-  # end
 
   def self.all
     @@all
@@ -35,6 +32,7 @@ class Song
   end
 
   def artist=(artist)
+    @artist = artist
     artist.add_song(self)
   end
 
