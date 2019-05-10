@@ -40,14 +40,24 @@ class Artist
     end
   end
 
-  def songs
-    @songs
-  end
+  # def songs
+  #   @songs
+  # end
 
-  def genres
+  def songs
     Song.all.select do |song|
       song.artist == self
     end
+  end
+
+  def genres
+    genres = []
+    songs.map do |song|
+      if !genres.include?(song.genre)
+        genres << song.genre
+      end
+    end
+    genres
   end
 
 end
