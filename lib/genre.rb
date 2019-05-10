@@ -1,12 +1,32 @@
 require 'pry'
 
 class Genre
-  extend Findable
 
-  attr_accessor :songs
+  @@all = []
 
-  def initialize
-    @songs = []
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
+    @@all << self
+  end
+
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    @@all = []
+  end
+
+  def save
+    @@all << self
+  end
+
+  def self.create(name)
+    genre = self.new(name)
+    genre.save
+    genre
   end
 
 end
