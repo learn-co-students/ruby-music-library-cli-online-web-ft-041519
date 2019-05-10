@@ -5,10 +5,9 @@ class Song
   
   def initialize(name, artist=nil, genre=nil)
     @name = name 
-    # @@all << self 
     self.artist=artist if artist 
     self.genre=genre if genre 
-    #initialize artist= and genre= method if artist and/or genre are passed in 
+    #initialize artist= and/or genre= method if artist and/or genre are passed in 
   end 
   
   def self.all 
@@ -57,8 +56,8 @@ class Song
           song 
         end 
   end 
-      # self.find_by_name(name) || self.create(name)
-      # self.all.find {|song| song.name == name} || self.new(name).save  
+      # the .create method calls on .save method which saves the instance to @@all
+      #.save method eliminates the need for @@all << self on initialize
   
   def self.new_from_filename(filename)
     song_name = filename.split(" - ")[1]

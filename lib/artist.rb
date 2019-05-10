@@ -28,9 +28,6 @@ class Artist
     artist 
   end 
   
-  def artists
-  end 
-  
   def genres 
     songs.collect {|song| song.genre}.uniq
     #returns a collection of genres for all of the artist's songs only including uniq genres
