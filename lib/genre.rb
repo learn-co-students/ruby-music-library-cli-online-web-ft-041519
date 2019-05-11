@@ -1,6 +1,7 @@
 require 'pry'
 
 class Genre
+  extend Concerns::Findable
 
   @@all = []
 
@@ -9,7 +10,6 @@ class Genre
   def initialize(name)
     @name = name
     @songs = []
-    @@all << self
   end
 
   def self.all
@@ -21,13 +21,19 @@ class Genre
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.create(name)
     genre = self.new(name)
     genre.save
     genre
+  end
+
+  def artists
+    songs.map do |song|
+      song.artist
+    end.uniq
   end
 
 end
