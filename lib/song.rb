@@ -27,7 +27,6 @@ class Song
   
   def self.create(name)
     song1 = self.new(name)
-    song1.save 
     song1
   end 
   
@@ -51,6 +50,17 @@ class Song
     else 
       self.create(name)
     end 
+  end 
+  
+  def self.new_from_filename(song2)
+    title = song2.split(" - ")
+    artist2 = Artist.find_or_create_by_name(title[0])
+    genre2 = Genre.find_or_create_by_name(title[2].split(".")[0])
+    Song.new(title[1], artist2, genre2)
+  end 
+  
+  def self.create_from_filename(song2)
+    self.new_from_filename(song2)
   end 
   
 end

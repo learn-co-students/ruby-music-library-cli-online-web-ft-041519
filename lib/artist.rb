@@ -1,6 +1,10 @@
 require_relative "../config/environment.rb"
+require_relative "../lib/concerns/findable.rb"
+
 
 class Artist
+  
+  extend Concerns::Findable
   
   attr_accessor :name, :songs
   
@@ -30,10 +34,7 @@ class Artist
   end 
   
   def add_song(song)
-    if song.artist == nil
-      song.artist = self
-      song.artist
-    end 
+    song.artist = self unless song.artist
     @songs << song unless @songs.include?(song)
   end 
   
