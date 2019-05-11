@@ -40,7 +40,7 @@ class MusicLibraryController
   def list_artists
     artists = MusicImporter.new(@path).files.collect{|x| x.split(" - ")[0]}.sort.uniq
     i = 0
-    
+    Artist.all.each{|x| artists << x.name}
     binding.pry
     artists.collect do |x| 
       i += 1  
