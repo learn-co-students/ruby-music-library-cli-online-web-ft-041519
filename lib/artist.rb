@@ -34,20 +34,16 @@ class Artist
   def add_song(song)
     if song.artist == nil
       song.artist = self
-    #   if !artist.song.include?(song)
-         self.songs << song
-    #   end
+      self.songs << song
+      song
     end
   end
 
-  # def songs
-  #   @songs
-  # end
-
   def songs
-    Song.all.select do |song|
-      song.artist == self
-    end
+    @songs
+    # Song.all.select do |song|
+    #   song.artist == self
+    # end
   end
 
   def genres
