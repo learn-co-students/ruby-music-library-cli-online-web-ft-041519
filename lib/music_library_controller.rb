@@ -1,6 +1,6 @@
 class MusicLibraryController
   
-  attr_accessor :path, :store
+  attr_accessor :path
   
   def initialize(path = './db/mp3s') 
     @path = path 
@@ -13,6 +13,8 @@ class MusicLibraryController
     
   user_input = 0 
   
+  until user_input == "exit"
+  
   puts "Welcome to your music library!"
   puts "To list all of your songs, enter 'list songs'."
   puts "To list all of the artists in your library, enter 'list artists'."
@@ -22,10 +24,24 @@ class MusicLibraryController
   puts "To play a song, enter 'play song'."
   puts "To quit, type 'exit'."
   puts "What would you like to do?"
+
+  user_input = gets.strip 
   
-  until user_input == "exit"
-    user_input = gets.chomp 
-  end
+  if user_input == "list songs"
+    list_songs
+  elsif user_input == "list artists"
+    list_artists
+  elsif user_input == "list genres"
+    list_genres
+  elsif user_input == "list artist"
+    list_songs_by_artist
+  elsif user_input == "list genre"
+    list_songs_by_genre
+  elsif user_input == "play song"
+    play_song
+  end 
+  
+  end 
   
   end 
   
@@ -38,7 +54,7 @@ class MusicLibraryController
     end 
     
     @store.each{|x| puts x }
-
+  
   end 
   
   def list_artists
@@ -121,15 +137,21 @@ class MusicLibraryController
   
   def play_song
     puts "Which song number would you like to play?"
+    
+    music = MusicImporter.new(@path).files.sort_by{|x| x.split(" - ")[1]}
+    i = 0
+    @store = music.collect do |x| 
+      i += 1  
+      "#{i}" + ". " + x.split(".")[0] 
+    end 
+    
     user_input = gets.chomp
-    if user_input.to_i.to_s == user_input 
-      value = user_input.to_i - 1
-      title = @store[value]
-      binding.pry
-      title = title.split(Regexp.union([". ", " - "]))
+    
+    if user_input.to_i.to_s == user_input && user_input.to_i.between?(1,@store.size)
+      title = @store[user_input.to_i-1].split(Regexp.union([". ", " - "]))
       puts "Playing #{title[2]} by #{title[1]}"
     end 
-     
-  end 
+    
+  end
   
 end 
