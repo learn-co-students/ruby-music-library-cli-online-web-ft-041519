@@ -37,15 +37,47 @@ class MusicLibraryController
 
   def list_artists
     artist_arr = []
-    artist.all.each do |artist|
+    Artist.all.each do |artist|
       artist_arr << artist.name
     end
     artist_arr.sort!
     num = 0
     artist_arr.each do |artist_name|
-      full_artist = artist.find_by_name(artist_name)
+      full_artist = Artist.find_by_name(artist_name)
       num += 1
-      puts "#{num}. #{full_artist.artist.name} - #{full_artist.name} - #{full_artist.genre.name}"
+
+      puts "#{num}. #{full_artist.name}"
+    end
+  end
+
+  def list_genres
+    genre_arr = []
+    Genre.all.each do |genre|
+      genre_arr << genre.name
+    end
+    genre_arr.sort!
+    num = 0
+    genre_arr.each do |genre_name|
+      full_genre = Genre.find_by_name(genre_name)
+      num += 1
+
+      puts "#{num}. #{full_genre.name}"
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    user_input = gets
+    artist = Artist.all.detect { |artist| artist.name == user_input }
+    song_arr = []
+    artist.songs.each do |song|
+      song_arr << song
+    end
+    song_arr.sort!
+    num = 0
+    song_arr.each do |song_name|
+      num += 1
+      puts "#{num}. #{song_name} - #{find_by_name(song_name).genre}"
     end
   end
 
