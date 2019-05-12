@@ -124,7 +124,7 @@ class MusicLibraryController
     user_input = gets.chomp
     if user_input.to_i.to_s == user_input 
       value = user_input.to_i - 1
-      title = title[value]
+      title = @store[value]
       binding.pry
       title = title.split(Regexp.union([". ", " - "]))
       puts "Playing #{title[2]} by #{title[1]}"
