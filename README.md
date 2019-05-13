@@ -1,4 +1,3 @@
-ABCD
 # Ruby Music Library
 
 ## Overview
