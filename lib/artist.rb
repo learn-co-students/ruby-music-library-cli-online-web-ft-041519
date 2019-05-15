@@ -30,11 +30,11 @@ class Artist
   end 
   
   def add_song(song)
-    if song.artist == nil 
-      song.artist = self
+    if !@songs.include?(song)
       @songs << song 
-    else # @songs.include?(song)
-      song.artist 
+    end 
+    if !song.artist  
+      song.artist = self 
     end 
   end 
   
@@ -42,6 +42,6 @@ class Artist
     # binding.pry
     @songs.map do |song|
       song.genre 
-    end 
+    end.uniq 
   end 
 end 
