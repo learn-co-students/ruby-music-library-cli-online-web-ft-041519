@@ -37,4 +37,11 @@ class Artist
       song.artist 
     end 
   end 
+  
+  def genres 
+    # binding.pry
+    @songs.map do |song|
+      song.genre 
+    end 
+  end 
 end 
