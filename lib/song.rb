@@ -34,7 +34,7 @@ class Song
 
   def artist=(artist)
     @artist = artist
-    artist.songs.add_song(self)
+    artist.add_song(self)
   end
 
   def genre=(genre)
@@ -60,9 +60,9 @@ class Song
     song_name = parse[1]
     artist_name = parse[0]
     genre_name = parse[2].gsub(".mp3", "")
-    song = parse.find_or_create_by_name(song_name)
-    artist = Artist.find_or_create_by_name(artist_name)
-    genre = Genre.find_or_create_by_name(genre_name)
+    song = Song.find_or_create_by_name(song_name)
+    song.artist = Artist.find_or_create_by_name(artist_name)
+    song.genre = Genre.find_or_create_by_name(genre_name)
     song
   end
 end
