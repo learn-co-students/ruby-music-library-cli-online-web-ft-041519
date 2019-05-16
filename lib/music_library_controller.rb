@@ -24,15 +24,15 @@ class MusicLibraryController
      user = gets.chomp
     
       if user == 'list songs'
-        long_songs
+        list_songs
       elsif user == 'list artists'
         list_artists
       elsif user == 'list genres'
         list_genres
       elsif user == 'list artist'
-        list_artist 
-      elsif user == 'list'
-        list_genre 
+        list_songs_by_artist 
+      elsif user == 'list genre'
+        list_songs_by_genre 
       elsif user == 'play song'
         play_song
      end 
