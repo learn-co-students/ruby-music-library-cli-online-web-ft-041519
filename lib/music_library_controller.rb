@@ -39,5 +39,21 @@ class MusicLibraryController
     end 
   end 
   
+  def list_songs
+   # binding.pry 
+    Song.all.sort { |a, b| a.name <=> b.name }
+  end 
+  
+  # def list_artists
+  # end 
+  
+  # def list_songs_by_artist
+  # end 
+  
+  # def list_songs_by_genre
+  # end 
+  
+  # def play_song
+  # end 
    
 end # end of class 
