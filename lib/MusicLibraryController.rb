@@ -41,51 +41,46 @@ class MusicLibraryController
     end
   end
   
-def list_songs
-  #binding.pry
-   # songs = Song.all.sort {|a, b| a.name <=> b.name} 
-  # binding.pry
-  
-    Song.all.each.with_index(1) {|song, index| puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"}
+  def list_songs
+    alpha_songs = Song.all.sort {|a, b| a.name <=> b.name}
+    alpha_songs.each.with_index(1) do |s, index| 
+      puts "#{index}. #{s.artist.name} - #{s.name} - #{s.genre.name}"
+    end
   end
-end
 
-def list_artists
+  def list_artists
     # Artist.all.each {|artist| puts artist.name}
-    artists = Artist.all.sort #{|a, b| a.name <=> b.name}
-    artists.each.with_index(1) {|artist, index| puts "#{index}. #{artist.name}"}
+    alpha_artists = Artist.all.sort {|a, b| a.name <=> b.name}
+    alpha_artists.each.with_index(1) {|artist, index| puts "#{index}. #{artist.name}"}
   end
 
-def list_genres
-    genres = Genre.all.sort #{|a, b| a.name <=> b.name} do i need a block for sort
-    genres.each.with_index(1) {|genre, index| puts "#{index}. #{genre.name}"}
+  def list_genres
+    alpha_genres = Genre.all.sort {|a, b| a.name <=> b.name}
+    alpha_genres.each.with_index(1) {|genre, index| puts "#{index}. #{genre.name}"}
   end
 
-def list_songs_by_artist
-  puts "Please enter the name of an artist:"
-    input = gets.strip
-
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+      input = gets.strip
     if artist = Artist.find_by_name(input)
-      songs_by_artist = artist.songs.sort #{ |a, b| a.name <=> b.name }
+      songs_by_artist = artist.songs.sort { |a, b| a.name <=> b.name }
       songs_by_artist.each.with_index(1) {|song, index| puts "#{index}. #{song.name} - #{song.genre.name}"}
     end
   end
 
 
-def list_songs_by_genre
-   puts "Please enter the name of a genre:"
-    input = gets.strip
-
+  def list_songs_by_genre
+    puts "Please enter the name of a genre:"
+      input = gets.strip
     if genre = Genre.find_by_name(input)
-      songs_by_genre = genre.songs.sort #{ |a, b| a.name <=> b.name }
-      songs_by_genre.each.with_index(1) do |song, index|
-        puts "#{index}. #{song.artist.name} - #{song.name}"
+      songs_by_genre = genre.songs.sort { |a, b| a.name <=> b.name }
+      songs_by_genre.each.with_index(1) {|song, index| puts "#{index}. #{song.artist.name} - #{song.name}"}
+      end
+    end
+  
+
+  def play_song
+    puts "Which song number would you like to play?"
+    input = gets.strip.to_i
     end
   end
-
-
-def play_song
-  puts "Which song number would you like to play?"
-  input = gets.strip
-end
-end
