@@ -1,3 +1,4 @@
+require "pry"
 require "spec_helper"
 
 describe "MusicLibraryController - CLI Methods" do
@@ -11,7 +12,7 @@ describe "MusicLibraryController - CLI Methods" do
       expect($stdout).to receive(:puts).with("3. Real Estate - It's Real - hip-hop")
       expect($stdout).to receive(:puts).with("4. Action Bronson - Larry Csonka - indie")
       expect($stdout).to receive(:puts).with("5. Jurassic 5 - What's Golden - hip-hop")
-
+   # binding.pry
       music_library_controller.list_songs
     end
 
@@ -20,7 +21,7 @@ describe "MusicLibraryController - CLI Methods" do
       expect($stdout).to receive(:puts).with("2. Alpha 9 - Bliss - trance")
       expect($stdout).to receive(:puts).with("3. Cass McCombs - County Line - indie")
       expect($stdout).to receive(:puts).with("4. Bob Dylan - Masters of War - folk")
-
+  #  binding.pry
       other_music_library_controller.list_songs
     end
   end
