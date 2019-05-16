@@ -54,5 +54,12 @@ class Song
       else 
         self.find_by_name(name)
     end 
+  end
+  
+  def self.new_from_filename(filename)
+   # binding.pry
+   song_name = filename.split(" - ")[1]
+   artist_name = filename.split(" - ")[0]
+   genre_name = filename.split(" - ")[2].gsub(".mp3", "")
   end 
 end 
