@@ -18,20 +18,26 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     
-    user = gets.chomp
+     user = "nil"
+     until user == "exit"
+     
+     user = gets.chomp
     
-    if user == 'list songs'
-      long_songs
-   elsif user == 'list artists'
-      list_artists
-    elsif user == 'list genres'
-      list_genres
-    elsif user == 'list artist'
-      list_artist 
-    elsif user == 'list'
-      list_genre 
-    elsif user == 'play song'
-      play_song 
+      if user == 'list songs'
+        long_songs
+      elsif user == 'list artists'
+        list_artists
+      elsif user == 'list genres'
+        list_genres
+      elsif user == 'list artist'
+        list_artist 
+      elsif user == 'list'
+        list_genre 
+      elsif user == 'play song'
+        play_song
+     end 
     end 
   end 
-end 
+  
+   
+end # end of class 
