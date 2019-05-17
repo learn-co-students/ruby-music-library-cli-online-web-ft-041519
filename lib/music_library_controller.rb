@@ -4,6 +4,8 @@ require_relative './concerns/findable'
 class MusicLibraryController
   extend Concerns::Findable
   
+  attr_accessor :songs
+  
   def initialize(path = "./db/mp3s")
     music_importer = MusicImporter.new(path)
     music_importer.import
@@ -29,6 +31,7 @@ class MusicLibraryController
     # list = Song.all.sort_by{|song| song.name}
     # list.each do |song|   
     Song.all.sort_by!{|s| s.name}.each do |song|
+      @songs << song
       puts "#{number}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       number += 1
     end
@@ -73,10 +76,11 @@ class MusicLibraryController
   end
   
   def play_song
+    # songs = list songs
     puts "Which song number would you like to play?"
     song_num = gets.chomp.to_i
-    if song_num > 0 && song_num <= list_songs.size
-      song = list_songs[song_num - 1]
+    if song_num > 0 && song_num <= @songs.size
+      song = @songs[song_num - 1]
       puts "Playing #{song.name} by #{song.artist.name}" 
     end    
   end
