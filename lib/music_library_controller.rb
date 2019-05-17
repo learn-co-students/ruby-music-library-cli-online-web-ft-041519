@@ -32,6 +32,7 @@ class MusicLibraryController
       puts "#{number}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       number += 1
     end
+    # return value = array of alphabetized Song objects
   end
   
   def list_artists
@@ -73,29 +74,11 @@ class MusicLibraryController
   
   def play_song
     puts "Which song number would you like to play?"
-    song_num = gets
-    song = arr[song_num.to_i - 1]
-    # if song_num < arr.size && song_num > 0
-    #   song = Song.find_by_name(arr[song_num - 1])
-    #   puts "Playing #{song.name} by #{song.artist.name}" 
-    # end
-    
-    
-    # song = list_songs[song_num - 1]
-    # if song is found, puts song
-    # elsif song is not found check input
-    
-    # if Song.find_by_name(song)
-    #   puts "Playing #{song.name} by #{song.artist.name}" 
-    # else
-    #   puts "Please enter a valid option"
-    #   play_song
-      # if song_num >= list_songs.size - 1 # validates_each
-        
-      # else
-      #   play_song
-      # end
-    # end
+    song_num = gets.chomp.to_i
+    if song_num > 0 && song_num <= list_songs.size
+      song = list_songs[song_num - 1]
+      puts "Playing #{song.name} by #{song.artist.name}" 
+    end    
   end
   
 end
