@@ -1,5 +1,6 @@
 require 'pry'
 class Artist
+  extend Concerns::Findable
   attr_accessor :name, :songs, :genres
 
   @@all = []
@@ -38,7 +39,7 @@ class Artist
 
   def genres
     # iterate over the @songs array, using the collect method
-     @songs.collect {|song| song.genre}.uniq 
+     @songs.collect {|song| song.genre}.uniq
   end
   # @songs.collect do |song|
   #   song.genre
