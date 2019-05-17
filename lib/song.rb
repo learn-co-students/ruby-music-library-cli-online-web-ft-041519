@@ -1,4 +1,3 @@
-require 'pry'
 require_relative './concerns/findable'
 
 class Song
@@ -34,11 +33,13 @@ class Song
 	end
 	
   def self.new_from_filename(filename)
-    
     file = {artist: filename.split(" - ")[0], 
             title: filename.split(" - ")[1], 
             genre: filename.split(" - ")[2].chomp(".mp3")}
-    song = Song.new(file[:title], file[:artist], file[:genre])
+    song = Song.new(file[:title])
+    song.artist = Artist.find_or_create_by_name(file[:artist])
+    song.genre = Genre.find_or_create_by_name(file[:genre])
+    song
   end
   
   def self.create_from_filename(filename)

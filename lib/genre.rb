@@ -21,21 +21,16 @@ class Genre
     genre
 	end
 	
+	def artists 
+	  @songs.collect{|song| song.artist}.uniq
+	end
+	
 	def self.all
 		@@all
 	end
 
 	def self.destroy_all
 		self.all.clear
-	end
-	
-# 	def add_song(song)
-# 	  @songs << song if !@songs.find{|s| s == song}
-# 	  song.genre = self if !song.genre  
-# 	end
-	
-	def artists 
-	  @songs.collect{|song| song.artist}.uniq
 	end
 	
 end
