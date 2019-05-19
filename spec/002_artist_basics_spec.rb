@@ -44,7 +44,7 @@ describe "Artist" do
       Artist.class_variable_set(:@@all, [artist])
 
       expect(Artist.all).to match_array([artist])
-    end
+    end 
   end
 
   describe ".destroy_all" do
