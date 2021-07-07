@@ -12,7 +12,7 @@ This is a complex lab with many parts, so go slowly. Take time to understand wha
 
 The first thing to do is get the basics of the main models working. Each model has almost the exact same basic requirements, so once you make `001_song_basics_spec.rb` pass by building the `Song` class, the basic `Artist` and `Genre` specs will go quickly.
 
-The requirements for each model are that they can accept a `name` upon initialization and set that property correctly. The `name` property should be readable and writable by the object.
+The requirements for each model are that they can learn accept a `name` upon initialization and set that property correctly. The `name` property should be readable and writable by the object.
 
 ```ruby
 Song.new("Blank Space").name #=> "Blank Space"`
